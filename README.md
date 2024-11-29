@@ -1,1 +1,1 @@
-# <img src="./images/lyra.svg" alt="icon" width="30" height="30"> Lyra: An Efficient and Speech-Centric Framework <br> for Omni-Cognition
+# <img src="./images/lyra.svg" alt="icon" width="30" height="30">Lyra: An Efficient and Speech-Centric Framework <br> for Omni-Cognition
