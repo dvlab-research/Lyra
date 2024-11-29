@@ -1,1 +1,1 @@
-# Lyra
+# Lyra: An Efficient and Speech-Centric Framework for Omni-Cognition
