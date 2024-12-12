@@ -28,5 +28,5 @@ python audio_download.py
 
 ### Download QA data
 
-Download `Lyra-LongSpeech.json` from ***URL[TODO]***, and put it to `data/LongSpeech/`
+Download `Lyra-LongSpeech.json` from https://huggingface.co/datasets/zszhong/Lyra_LongSpeech, and put it to `data/LongSpeech/`.
 
