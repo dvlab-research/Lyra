@@ -37,13 +37,11 @@ Lyra shows superiority compared with leading omni-models in:
 ## Demo
 We provide some selected examples in this section. More examples can be found in our [project page](https://mini-gemini.github.io/). Feel free to try our online [demo](http://103.170.5.190:7860/)!
 
-```html
 <p align="center" width="80%">
   <a href="https://youtu.be/7kh-M0jmmtI" target="_blank">
-    <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Stanford-Alpaca" style="width: 80%; min-width: 300px; display: block; margin: auto;">
+    <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Lyra" style="width: 80%; min-width: 300px; display: block; margin: auto;">
   </a>
 </p>
-```
 
 
 ## Install
