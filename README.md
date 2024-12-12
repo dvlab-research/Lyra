@@ -15,8 +15,8 @@ Overview of Lyra:
 
 Lyra shows superiority compared with leading omni-models in:
 
-1. Stronger performance: achieve SOTA results across a variety of speech-centric understanding and reasoning tasks.
-2. More versatile:  Support image, video, speech/long-speech, sound understanding and speech/image(soon) generation
+1. Stronger performance: achieve SOTA results across a variety of speech-centric tasks.
+2. More versatile:  Support image, video, speech/long-speech, sound understanding and speech generation.
 3. More efficient: Less training data, support faster training and inference.
 
 ## Release
@@ -38,9 +38,9 @@ Lyra shows superiority compared with leading omni-models in:
 We provide some selected examples in this section. More examples can be found in our [project page](https://mini-gemini.github.io/). Feel free to try our online [demo](http://103.170.5.190:7860/)!
 
 ```html
-<p align="center" width="90%">
+<p align="center" width="80%">
   <a href="https://youtu.be/7kh-M0jmmtI" target="_blank">
-    <img src="assets/video.png" style="width: 80%; min-width: 300px; display: block; margin: auto;">
+    <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Stanford-Alpaca" style="width: 80%; min-width: 300px; display: block; margin: auto;">
   </a>
 </p>
 ```
