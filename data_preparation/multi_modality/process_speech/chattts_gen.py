@@ -48,7 +48,7 @@ for i in tqdm(range(len(texts_all) // split + 1)):
         )
 
         for wav_id in range(len(wavs)):
-            torchaudio.save("mgm_sft_speech/Lyra_speech/{}.mp3".format(ids[wav_id]), torch.from_numpy(wavs[wav_id]), 24000)
+            torchaudio.save("Lyra_MM/{}.mp3".format(ids[wav_id]), torch.from_numpy(wavs[wav_id]), 24000)
         
     except Exception as e:
         print("Error: ", e)

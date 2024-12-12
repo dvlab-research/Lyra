@@ -2,12 +2,12 @@
 Lyra supports both sound and speech. The audio data preparation scripts are organized as follows.
 
 ```
-data
-|──MultiModality
-|   |──README.md
-|   |──process_speech
-|   |──process_sound
-|──... 
+|──data
+|   |──MultiModality
+|   |   |──README.md
+|   |   |──process_speech
+|   |   |──process_sound
+|   |──... 
 ```
 
 ### Speech
@@ -42,13 +42,21 @@ python prepare_librispeech.py --input_dir '[YOUR Librispeech SPEECHES PATH]' \
 
 We use [ChatTTS](https://github.com/2noise/ChatTTS) to convert text-image SFT data to speech-image SFT data.
 
-- Add unique speech id and choose the text to be converted. Please refer to [prepare_speech_image_sft_data.ipynb](process_speech/prepare_speech_image_sft_data.ipynb).
+- Add unique speech id and choose the text to be converted. Please refer to [prepare_speech_image_sft_data.ipynb](process_speech/prepare_speech_image_sft_data.ipynb) (Part 1. Add speech ID and filter text).
 
 - Generate speeches using [chattts_gen.py](process_speech/chattts_gen.py)
 
 
-- Process the original SFT annotation. Please refer to [prepare_speech_image_sft_data.ipynb](process_speech/prepare_speech_image_sft_data.ipynb).
+- Process the original SFT annotation. Please refer to [prepare_speech_image_sft_data.ipynb](process_speech/prepare_speech_image_sft_data.ipynb) (Part 2. Reorganize SFT annotation data).
 
+
+- The final speech's folder architecture should be 
+```
+|──speech_sft_data
+|  |──LibriSpeech
+|  |──Lyra_MM
+|──... 
+```
 
 ### Sound 
 - Download `csv` file [here](https://github.com/cdjkim/audiocaps/tree/master/dataset). The header of the CSV file are:
