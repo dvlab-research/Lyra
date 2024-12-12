@@ -1,26 +1,26 @@
-# <img src="assets/lyra.svg" alt="icon" width="30" height="30"> <span style="font-size:30px;">Lyra: An Efficient and Speech-Centric Framework for Omni-Cognition</span>
+# <img src="assets/lyra.svg" alt="icon" width="30" height="30"> <span style="font-size:30px;">Lyra: An Efficient and Speech-Centric Framework <br>for Omni-Cognition</span>
 
-<a href='https://mini-gemini.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-<a href='http://103.170.5.190:7860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
-<a href='https://huggingface.co/spaces/wcy1122/MGM'><img src='https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue.svg'></a>
-<a href='https://arxiv.org/pdf/2403.18814.pdf'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
-<a href='https://huggingface.co/collections/YanweiLi/mgm-6603c50b9b43d044171d0854'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
-<a href='https://huggingface.co/collections/YanweiLi/mgm-data-660463ea895a01d8f367624e'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
+<a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
+<a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
+<a href='https://arxiv.org/pdf/2403.18814.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-data-675ae0266403ecb5a2d02352'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-eval-675afaafd1f326275b6349c4'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a>
 
 
 Overview of Lyra:
 <div align=center>
-<img width="90%" src="assets/overview.png"/>
+<img width="98%" src="assets/overview.png"/>
 </div>
 
 Lyra shows superiority compared with leading omni-models in:
 
-1. Stronger performance: achieve SOTA results across a variety of speech-centric tasks.
+1. Stronger performance: Achieve SOTA results across a variety of speech-centric tasks.
 2. More versatile:  Support image, video, speech/long-speech, sound understanding and speech generation.
 3. More efficient: Less training data, support faster training and inference.
 
 ## Release
-- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2403.18814.pdf), [demo](http://103.170.5.190:7860/), [code](https://github.com/dvlab-research/MGM), [models](https://huggingface.co/collections/YanweiLi/mgm-6603c50b9b43d044171d0854'). More related data and checkpoints will be released soon!
+- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2403.18814.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/YanweiLi/mgm-6603c50b9b43d044171d0854'). More related data and checkpoints will be released soon!
 
 ## Contents
 - [Demo](#demo)
@@ -35,13 +35,14 @@ Lyra shows superiority compared with leading omni-models in:
 - [License](#license)
 
 ## Demo
-We provide some selected examples in this section. More examples can be found in our [project page](https://mini-gemini.github.io/). Feel free to try our online [demo](http://103.170.5.190:7860/)!
+We provide [video demo](https://www.youtube.com/watch?v=7kh-M0jmmtI) here for better experience and illustrations. More examples can be found in our [project page](https://lyra-omni.github.io/) and feel free to try our [online demo](https://103.170.5.190:17860/)! Due to the computing cost, GPU memory of the demo machine (3090), and uploading storage, the long-speech function is not supported for the current online demo. 😰
 
-<p align="center" width="80%">
+<p align="center" width="98%">
   <a href="https://youtu.be/7kh-M0jmmtI" target="_blank">
-    <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Lyra" style="width: 80%; min-width: 300px; display: block; margin: auto;">
+    <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Lyra" style="width: 98%; min-width: 300px; display: block; margin: auto;">
   </a>
 </p>
+
 
 
 ## Install
@@ -71,14 +72,160 @@ pip install --upgrade pip
 ## Model
 
 <div align=center>
-<img width="90%" src="assets/framework.png"/>
+<img width="98%" src="assets/framework.png"/>
 </div>
-
 
 
 Lyra supports multi-modal inputs. When the data contains a speech modality, we use the **latent cross-modality regularizer** to assist. Data from each modality is processed through encoders and projectors before being sent into the LLM. Within the LLM, **multi-modality LoRA** and l**atent multi-modality extraction** modules operate synergistically, facilitating the **simultaneous generation** of both speech and text outputs.
 
+## Preparation
+### Dataset
+
+We provide the processed data for the model training. 
+
+For **model pretraining data**, please download the following the training multi-modality data and organize them as:
+
+`->` means put the data in the local folder.
+
+- [LibriSpeech](https://www.openslr.org/12) -> `data/Lyra_Pretrain/LibriSpeech` 
+
+  ​              and -> `data/Lyra_SFT_MM_speech/LibriSpeech` download all training and develop data.
+
+- [Common Voice](https://commonvoice.mozilla.org/en/datasets) -> `data/Lyra_Pretrain/CommonVoice` download the English Common Voice Corpus.
+
+During the pretraining process, we filtered out some noisy and short audio speech data.
+
+For the **image part of finetuning data**, similar to Mini-Gemini, please download the following the instruction data and organize them as:
+
+`->` means put the data in the local folder.
+
+- [COCO train2017](http://images.cocodataset.org/zips/train2017.zip) -> `data/Lyra_Finetune/coco`
+- [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip) -> `data/Lyra_Finetune/gqa`
+- [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing) (**we save all files as `.jpg`**) -> `data/Lyra_Finetune/ocr_vqa`
+- [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip) (not included for training) -> `data/Lyra_Finetune/textvqa`
+- [VisualGenome part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [VisualGenome part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip) -> `data/Lyra_Finetune/vg`
+- [ShareGPT4V-100K](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) -> `data/Lyra_Finetune/sam`, `share_textvqa`, `wikiart`, `web-celebrity`, `web-landmark`
+- [LAION GPT4V](https://huggingface.co/datasets/laion/gpt4v-dataset) -> `data/Lyra_Finetune/gpt4v-dataset`
+- [ALLaVA Instruction](https://github.com/FreedomIntelligence/ALLaVA) -> `data/Lyra_Pretrain/ALLaVA-4V`
+- [DocVQA](https://www.docvqa.org/datasets/docvqa) -> `data/Lyra_Finetune/docvqa`
+- [ChartQA](https://github.com/vis-nlp/ChartQA) -> `data/Lyra_Finetune/chartqa`
+- [DVQA](https://github.com/kushalkafle/DVQA_dataset) -> `data/Lyra_Finetune/dvqa`
+- [AI2D](https://allenai.org/data/diagrams) -> `data/Lyra_Finetune/ai2d`
+
+For the **audio part of finetuning data**, please download the following the instruction data and organize them as:
+
+`->` means put the data in the local folder.
+
+- [Lyra_MultiModal](https://huggingface.co/datasets/zszhong/Lyra_MultiModal) -> `data/Lyra_SFT_MM_speech/Lyra_MultiModal` 
+
+  For details, please refer the [Lyra multi-modality preparation]().
+
+For the **long speech** audio finetuning data, please download the following the instruction data and organize them as:
+
+`->` means put the data in the local folder.
+
+- [Lyra_LongSpeech](https://huggingface.co/datasets/zszhong/Lyra_LongSpeech) -> `data/Lyra_SFT_longspeech/Lyra_LongSpeech`
+
+  For details, please refer the [Lyra long-speech preparation]().
+
+For the **text-speech generation** data, please download the following the instruction data and organize them as:
+
+`->` means put the data in the local folder.
+
+- [Lyra_SpeechGeneration](https://huggingface.co/datasets/zszhong/Lyra_SpeechGeneration)  -> `data/Lyra_speech_generation` 
+
+  For details, please refer the [Lyra speech generation preparation]().
+
+For **model evaluation data**, to be release soon!
+
+Please put the pretrained data, finetuned data, and eval data in  `Lyra_Pretrain`, `Lyra_SFT`, and `Lyra_Eval` subset following [Structure](#structure).
+
+### Pretrained Weights
+
+We recommend users to download the pretrained weights from the following link Qwen2VL_2B_LLM, Qwen2VL_7B_LLM, Qwen2VL_70B_LLM, Qwen2VL_2B_ViT, Qwen2VL_7B_ViT, Qwen2VL_70B_ViT, [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo), [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3),  [imagebind_huge](https://dl.fbaipublicfiles.com/imagebind/imagebind_huge.pth), and put them in `model_zoo` following [Structure](#structure).
+
+Download the unit-based HiFi-GAN vocoder using the follow commands:
+
+```shell
+wget https://dl.fbaipublicfiles.com/fairseq/speech_to_speech/vocoder/code_hifigan/mhubert_vp_en_es_fr_it3_400k_layer11_km1000_lj/g_00500000 -P model_zoo/audio/vocoder/
+wget https://dl.fbaipublicfiles.com/fairseq/speech_to_speech/vocoder/code_hifigan/mhubert_vp_en_es_fr_it3_400k_layer11_km1000_lj/config.json -P model_zoo/audio/vocoder/
+```
+
+### Structure
+
+The folder structure should be organized as follows before training.
+
+```
+Lyra
+├── lyra
+├── scripts
+├── work_dirs
+│   ├── Lyra
+│   │   ├── Lyra_Mini_3B
+│   │   ├── Lyra_Base_9B
+│   │   ├── Lyra_Pro_74B
+│   │   ├── ...
+├── model_zoo
+│   ├── LLM
+│   │   ├── Qwen2VL_2B_LLM
+│   │   ├── Qwen2VL_7B_LLM
+│   │   ├── Qwen2VL_70B_LLM
+│   │   ├── Qwen2.5
+│   │   ├── LLaMA3.2
+│   │   ├── ...
+│   ├── vision
+│   │   ├── Qwen2VL_2B_ViT
+│   │   ├── Qwen2VL_7B_ViT
+│   │   ├── Qwen2VL_70B_ViT
+│   │   ├── clip-vit-large
+│   │   ├── siglip
+│   │   ├── ConvNeXt
+│   │   ├── ...
+│   ├── audio
+│   │   ├── whisper-large-v3-turbo
+│   │   ├── whisper-large-v3
+│   │   ├── imagebind_huge
+│   │   ├── vocoder
+│   │   ├── ...
+├── data
+│   ├── Lyra_Pretrain
+│   │   ├── lyra_pretrain.json
+│   │   ├── LibriSpeech
+│   │   ├── CommonVoice
+│   ├── Lyra_SFT_MM_speech
+│   │   ├── lyra_multimodal.json
+│   │   ├── Lyra_MultiModal
+│   │   ├── LibriSpeech
+│   ├── Lyra_SFT_MM_image (similar to MGM-Finetune)
+│   │   ├── llava
+│   │   ├── coco
+│   │   ├── gqa
+│   │   ├── ocr_vqa
+│   │   ├── textvqa
+│   │   ├── vg
+│   │   ├── gpt4v-dataset
+│   │   ├── ...
+│   ├── Lyra_SFT_longspeech
+│   │   ├── lyra_longspeech.json
+│   │   ├── Lyra_LongSpeech
+│   ├── Lyra_speech_generation
+│   │   ├── lyra_speechgeneration.json
+│   ├── Lyra_Eval
+│   │   ├── MM-Vet
+│   │   ├── TextVQA
+│   │   ├── VideoMME
+│   │   ├── ...
+```
+
+## Train
+
+To be release soon!
+
+
+
 ## Evaluation
+
+### Benchmarks Results
 
 <table>
   <tr>
@@ -272,9 +419,64 @@ Lyra supports multi-modal inputs. When the data contains a speech modality, we u
 </table>
 
 
+### Benchmarks scripts
+
+To be release soon!
+
+### CLI Inference
+
+Chat with images without the need of Gradio interface. It also supports multiple GPUs, 4-bit and 8-bit quantized inference.
+Please make sure you have installed [fairseq](https://github.com/facebookresearch/fairseq) for speech generation, and try the following command for speech and generation inference:
+
+```bash
+python -m lyra.serve.cli                                  \
+	--model-path path/to/Lyra_Base_9B                 \
+	--image-file examples/Chinese_painting.jpg        \ # <path to your image: context>
+	--speech-file examples/Chinese_painting.mp3       \ # <path to your audio: instruction>
+	--generate-speech                                   # examples/pred_roundX.wav
+```
+
+Lyra can also handle the long speech input (max duration can be about two or three hours).
+
+Here is an example: [ABC New, Oct. 1, 2024](https://www.youtube.com/watch?v=A7LTOsf7JMQ&t=1063s), 20 mins:
+
+```bash
+python -m lyra.serve.cli                                  \
+	--model-path path/to/Lyra_Base_9B                 \
+	--speech-file examples/ABC_News_20241001.mp3      \ # <path to your long audio: context>
+	--generate-speech                                   # text instuction by the keyboard input
+```
+
+You can also try 8bit or even 4bit for efficient inference: 
+```bash
+python -m lyra.serve.cli                                  \
+    --model-path path/to/Lyra_Base_9B                     \
+    --image-file examples/extreme_ironing.jpg             \
+    --speech-file examples/extreme_ironing.mp3            \
+    --generate-speech 
+    --load-8bit
+```
+
+### Gradio Web UI
+
+To be release soon!
+
+
+
+## Examples
+We provide some examples in this section. More examples can be found in our [project page](https://lyra-omni.github.io/).
+
+<div align=center>
+<img width="98%" src="assets/demo_vlm.png"/>
+</div>
+
+<div align=center>
+<img width="98%" src="assets/demo_news.png"/>
+</div>
+
 
 ## Citation
-If you find this repo useful for your research, please consider citing the paper
+If you find this repo useful for your research, please consider citing the paper😊:
 ```
 @article{zhong2024lyra,
   title={Lyra: An Efficient and Speech-Centric Framework for Omni-Cognition},
