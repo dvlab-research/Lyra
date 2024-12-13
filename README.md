@@ -89,7 +89,9 @@ For **model pretraining data**, please download the following the training multi
 
 - [LibriSpeech](https://www.openslr.org/12) -> `data/Lyra_Pretrain/LibriSpeech` 
 
-  ​              and -> `data/Lyra_SFT_MM_speech/LibriSpeech` download all training and develop data.
+  ​              and -> `data/Lyra_SFT/multi_modality_speech/LibriSpeech`
+
+  ​	      and -> `data/Lyra_Eval/LibriSpeech`   download all training and develop data.
 
 - [Common Voice](https://commonvoice.mozilla.org/en/datasets) -> `data/Lyra_Pretrain/CommonVoice` download the English Common Voice Corpus.
 
@@ -99,24 +101,24 @@ For the **image part of finetuning data**, similar to Mini-Gemini, please downlo
 
 `->` means put the data in the local folder.
 
-- [COCO train2017](http://images.cocodataset.org/zips/train2017.zip) -> `data/Lyra_Finetune/coco`
-- [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip) -> `data/Lyra_Finetune/gqa`
-- [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing) (**we save all files as `.jpg`**) -> `data/Lyra_Finetune/ocr_vqa`
-- [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip) (not included for training) -> `data/Lyra_Finetune/textvqa`
-- [VisualGenome part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [VisualGenome part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip) -> `data/Lyra_Finetune/vg`
-- [ShareGPT4V-100K](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) -> `data/Lyra_Finetune/sam`, `share_textvqa`, `wikiart`, `web-celebrity`, `web-landmark`
-- [LAION GPT4V](https://huggingface.co/datasets/laion/gpt4v-dataset) -> `data/Lyra_Finetune/gpt4v-dataset`
-- [ALLaVA Instruction](https://github.com/FreedomIntelligence/ALLaVA) -> `data/Lyra_Pretrain/ALLaVA-4V`
-- [DocVQA](https://www.docvqa.org/datasets/docvqa) -> `data/Lyra_Finetune/docvqa`
-- [ChartQA](https://github.com/vis-nlp/ChartQA) -> `data/Lyra_Finetune/chartqa`
-- [DVQA](https://github.com/kushalkafle/DVQA_dataset) -> `data/Lyra_Finetune/dvqa`
-- [AI2D](https://allenai.org/data/diagrams) -> `data/Lyra_Finetune/ai2d`
+- [COCO train2017](http://images.cocodataset.org/zips/train2017.zip) -> `data/Lyra_SFT/multi_modality_image/coco`
+- [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip) -> `data/Lyra_SFT/multi_modality_image/gqa`
+- [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing) (**we save all files as `.jpg`**) -> `data/Lyra_SFT/multi_modality_image/ocr_vqa`
+- [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip) (not included for training) -> `data/Lyra_SFT/multi_modality_image/textvqa`
+- [VisualGenome part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [VisualGenome part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip) -> `data/Lyra_SFT/multi_modality_image/vg`
+- [ShareGPT4V-100K](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) -> `data/Lyra_SFT/multi_modality_image/sam`, `share_textvqa`, `wikiart`, `web-celebrity`, `web-landmark`
+- [LAION GPT4V](https://huggingface.co/datasets/laion/gpt4v-dataset) -> `data/Lyra_SFT/multi_modality_image/gpt4v-dataset`
+- [ALLaVA Instruction](https://github.com/FreedomIntelligence/ALLaVA) -> `data/Lyra_SFT/multi_modality_image/ALLaVA-4V`
+- [DocVQA](https://www.docvqa.org/datasets/docvqa) -> `data/Lyra_SFT/multi_modality_image/docvqa`
+- [ChartQA](https://github.com/vis-nlp/ChartQA) -> `data/Lyra_SFT/multi_modality_image/chartqa`
+- [DVQA](https://github.com/kushalkafle/DVQA_dataset) -> `data/Lyra_SFT/multi_modality_image/dvqa`
+- [AI2D](https://allenai.org/data/diagrams) -> `data/Lyra_SFT/multi_modality_image/ai2d`
 
 For the **audio part of finetuning data**, please download the following the instruction data and organize them as:
 
 `->` means put the data in the local folder.
 
-- [Lyra_MultiModal](https://huggingface.co/datasets/zszhong/Lyra_MultiModal) -> `data/Lyra_SFT_MM_speech/Lyra_MultiModal` 
+- [Lyra_MultiModal](https://huggingface.co/datasets/zszhong/Lyra_MultiModal) -> `data/Lyra_SFT/multi_modality_speech/Lyra_MM` 
 
   For details, please refer the [Lyra multi-modality preparation]().
 
@@ -124,7 +126,7 @@ For the **long speech** audio finetuning data, please download the following the
 
 `->` means put the data in the local folder.
 
-- [Lyra_LongSpeech](https://huggingface.co/datasets/zszhong/Lyra_LongSpeech) -> `data/Lyra_SFT_longspeech/Lyra_LongSpeech`
+- [Lyra_LongSpeech](https://huggingface.co/datasets/zszhong/Lyra_LongSpeech) -> `data/Lyra_SFT/long_speech/Lyra_LongSpeech`
 
   For details, please refer the [Lyra long-speech preparation]().
 
@@ -132,7 +134,7 @@ For the **text-speech generation** data, please download the following the instr
 
 `->` means put the data in the local folder.
 
-- [Lyra_SpeechGeneration](https://huggingface.co/datasets/zszhong/Lyra_SpeechGeneration)  -> `data/Lyra_speech_generation` 
+- [Lyra_SpeechGeneration](https://huggingface.co/datasets/zszhong/Lyra_SpeechGeneration)  -> `data/Lyra_SFT/speech_generation` 
 
   For details, please refer the [Lyra speech generation preparation]().
 
@@ -192,36 +194,63 @@ Lyra
 │   │   ├── lyra_pretrain.json
 │   │   ├── LibriSpeech
 │   │   ├── CommonVoice
-│   ├── Lyra_SFT_MM_speech
-│   │   ├── lyra_multimodal.json
-│   │   ├── Lyra_MultiModal
-│   │   ├── LibriSpeech
-│   ├── Lyra_SFT_MM_image (similar to MGM-Finetune)
-│   │   ├── llava
-│   │   ├── coco
-│   │   ├── gqa
-│   │   ├── ocr_vqa
-│   │   ├── textvqa
-│   │   ├── vg
-│   │   ├── gpt4v-dataset
-│   │   ├── ...
-│   ├── Lyra_SFT_longspeech
-│   │   ├── lyra_longspeech.json
-│   │   ├── Lyra_LongSpeech
-│   ├── Lyra_speech_generation
-│   │   ├── lyra_speechgeneration.json
+│   ├── Lyra_SFT
+│   │   ├── multi_modality_speech
+│   │   │   ├── lyra_multimodal.json
+│   │   │   ├── Lyra_MM
+│   │   │   ├── LibriSpeech
+│   │   ├── multi_modality_image (similar to MGM-Finetune)
+│   │   │   ├── llava
+│   │   │   ├── coco
+│   │   │   ├── gqa
+│   │   │   ├── ocr_vqa
+│   │   │   ├── textvqa
+│   │   │   ├── vg
+│   │   │   ├── gpt4v-dataset
+│   │   │   ├── ...
+│   │   ├── long_speech
+│   │   │   ├── lyra_longspeech.json
+│   │   │   ├── Lyra_LongSpeech
+│   │   ├── speech_generation
+│   │   │   ├── lyra_speechgeneration.json
 │   ├── Lyra_Eval
-│   │   ├── MM-Vet
-│   │   ├── TextVQA
-│   │   ├── VideoMME
-│   │   ├── ...
+│   │   ├── LibriSpeech
+│   │   ├── TextVQA_speech
+│   │   ├── MM_vet_speech
+│   │   ├── Docvqa_val
+│   │   ├── Chartvqa_human
+│   │   ├── VideoMME_speech
+│   │   ├── Lyra_needle_in_a_haystack
 ```
 
 ## Train
 
-To be release soon!
+The training process consists of four stages: (1) feature alignment stage: bridge the speech and language tokens; (2) multi-modality instruction tuning stage: teach the model to follow text-image-speech multimodal instructions. (3) long-speech instruction tuning stage: enable the model to handle long speech audios. (4) text-speech streaming generation stage: Enable the model to stream both text and speech simultaneously.
 
+Our models are trained on 8 A100 GPUs with 80GB memory. To train on fewer GPUs, you can reduce the `per_device_train_batch_size` and increase the `gradient_accumulation_steps` accordingly. Always keep the global batch size the same: `per_device_train_batch_size` x `gradient_accumulation_steps` x `num_gpus`.
 
+Please make sure you download and organize the data following [Preparation](#preparation) before training.
+
+NOTE: Please set `hostfile/hostfile_2` for 2 machine training and `hostfile/hostfile_4` for 4 machine training.
+
+ (1) feature alignment stage: 
+
+```bash
+bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_Pretrain.sh
+```
+ (2) multi-modality instruction tuning stage:
+```bash
+bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_text_image_speech.sh
+```
+(3) long-speech instruction tuning stage:
+```bash
+bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_long_speech.sh
+```
+(4) text-speech streaming generation stage:
+
+```bash
+bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_speech_generate.sh
+```
 
 ## Evaluation
 
@@ -429,33 +458,53 @@ Chat with images without the need of Gradio interface. It also supports multiple
 Please make sure you have installed [fairseq](https://github.com/facebookresearch/fairseq) for speech generation, and try the following command for speech and generation inference:
 
 ```bash
-python -m lyra.serve.cli                                  \
-	--model-path path/to/Lyra_Base_9B                 \
-	--image-file examples/Chinese_painting.jpg        \ # <path to your image: context>
-	--speech-file examples/Chinese_painting.mp3       \ # <path to your audio: instruction>
-	--generate-speech                                   # examples/pred_roundX.wav
+# image-file:       <path to your image: context>
+# speech-file:      <path to your audio: instruction>
+# generate speech:  <output path to generated speech: examples/pred_roundX.wav>
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Base_9B \
+	--image-file examples/Chinese_painting.jpg \
+	--audio-file examples/Chinese_painting.mp3 \
+	--generate-speech
 ```
 
-Lyra can also handle the long speech input (max duration can be about two or three hours).
+Lyra can also handle your long speech input (max duration can be about two or three hours).
 
 Here is an example: [ABC New, Oct. 1, 2024](https://www.youtube.com/watch?v=A7LTOsf7JMQ&t=1063s), 20 mins:
 
 ```bash
-python -m lyra.serve.cli                                  \
-	--model-path path/to/Lyra_Base_9B                 \
-	--speech-file examples/ABC_News_20241001.mp3      \ # <path to your long audio: context>
-	--generate-speech                                   # text instuction by the keyboard input
+# speech-file: <path to your long audio: context>
+# instuction by the text keyboard input
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Base_9B \
+	--audio-file examples/ABC_News_20241001.mp3 \
+	--generate-speech
 ```
 
-You can also try 8bit or even 4bit for efficient inference: 
+Here is an example for video input with its audio (you can use [ffmpeg](https://github.com/kkroening/ffmpeg-python) or other tools to extract video's audio): 
+
 ```bash
-python -m lyra.serve.cli                                  \
-    --model-path path/to/Lyra_Base_9B                     \
-    --image-file examples/extreme_ironing.jpg             \
-    --speech-file examples/extreme_ironing.mp3            \
-    --generate-speech 
-    --load-8bit
+# video-file:  <path to your video: context>
+# speech-file: <path to your audio: instruction>
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Base_9B \
+	--video-file examples/movement.mp4 \
+	--audio-file examples/movement.mp3 \
+	--generate-speech
 ```
+
+Here is an example for video input and text instruction:
+
+```bash
+# video-file: <path to your video: context>
+# instuction by the text keyboard input
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Base_9B \
+	--video-file examples/Trump.mp4 \
+	--generate-speech
+```
+
+
 
 ### Gradio Web UI
 
