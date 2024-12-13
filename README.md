@@ -2,7 +2,7 @@
 
 <a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 <a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
-<a href='https://arxiv.org/pdf/2403.18814.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-data-675ae0266403ecb5a2d02352'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-eval-675afaafd1f326275b6349c4'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a>
@@ -20,7 +20,7 @@ Lyra shows superiority compared with leading omni-models in:
 3. More efficient: Less training data, support faster training and inference.
 
 ## Release
-- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2403.18814.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/YanweiLi/mgm-6603c50b9b43d044171d0854'). More related data and checkpoints will be released soon!
+- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2412.09501.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'). More related data and checkpoints will be released soon!
 
 ## Contents
 - [Demo](#demo)
@@ -481,7 +481,7 @@ If you find this repo useful for your research, please consider citing the paper
 @article{zhong2024lyra,
   title={Lyra: An Efficient and Speech-Centric Framework for Omni-Cognition},
   author={Zhong, Zhingsheng and Wang, Chengyao and Liu, Yuqi and Yang, Senqiao and Tang, Longxiang and Zhang, Yuechen and Li, Jingyao and Qu, Tianyuan and Li, Yanwei and Chen, Yukang and Yu, Shaozuo and Wu, Sitong and Lo, Eric and Liu, Shu and Jia, Jiaya},
-  journal={arXiv preprint arXiv:xxxx.xxxx},
+  journal={arXiv preprint arXiv:2412.09501},
   year={2024}
 }
 ```
