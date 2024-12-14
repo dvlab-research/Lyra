@@ -102,9 +102,6 @@ class LyraQwen2VLForCausalLMExtractor(Qwen2ForCausalLM, LyraMetaForCausalLMExtra
         )
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
         if inputs_embeds is None:
-            # if self.config.train_modality == 'text_image':
-            #     prepare_inputs_labels = self.prepare_inputs_labels_for_text_image_speech_qwen2vl
-            # elif self.config.train_modality == 'text_speech':
             prepare_inputs_labels = self.prepare_inputs_labels_for_text_image_speech_qwen2vl
             
             (

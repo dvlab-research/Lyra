@@ -1,11 +1,11 @@
 # <img src="assets/lyra.svg" alt="icon" width="30" height="30"> <span style="font-size:30px;">Lyra: An Efficient and Speech-Centric Framework <br>for Omni-Cognition</span>
 
-<a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-<a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
 <a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
-<a href='https://huggingface.co/collections/zszhong/lyra-data-675ae0266403ecb5a2d02352'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
-<a href='https://huggingface.co/collections/zszhong/lyra-eval-675afaafd1f326275b6349c4'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-data-675d80fbab80334eb52cdd82'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a>
+<a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 
 
 Overview of Lyra:
@@ -14,13 +14,12 @@ Overview of Lyra:
 </div>
 
 Lyra shows superiority compared with leading omni-models in:
-
 1. Stronger performance: Achieve SOTA results across a variety of speech-centric tasks.
 2. More versatile:  Support image, video, speech/long-speech, sound understanding and speech generation.
 3. More efficient: Less training data, support faster training and inference.
 
 ## Release
-- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2412.09501.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'). More related data and checkpoints will be released soon!
+- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2412.09501.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc). More related data and checkpoints will be released soon!
 
 ## Contents
 - [Demo](#demo)
@@ -78,73 +77,110 @@ pip install --upgrade pip
 
 Lyra supports multi-modal inputs. When the data contains a speech modality, we use the **latent cross-modality regularizer** to assist. Data from each modality is processed through encoders and projectors before being sent into the LLM. Within the LLM, **multi-modality LoRA** and l**atent multi-modality extraction** modules operate synergistically, facilitating the **simultaneous generation** of both speech and text outputs.
 
-## Preparation
-### Dataset
+We provide all our fully finetuned models:
 
-We provide the processed data for the model training. 
+| Model        | Base LLM           | Vision Encoder     | Speech Encoder                                               | Projector   | Full                                                   |
+| ------------ | ------------------ | ------------------ | ------------------------------------------------------------ | ----------- | ------------------------------------------------------ |
+| Lyra_Mini_3B | [Qwen2VL_2B_LLM]() | [Qwen2VL_2B_ViT]() | [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo) | [3B_proj]() | [3B_ckpt]()                                            |
+| Lyra_Base_9B | [Qwen2VL_7B_LLM]() | [Qwen2VL_7B_ViT]() | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [9B_proj]() | [9B_ckpt](https://huggingface.co/zszhong/Lyra_Base_9B) |
+| Lyra_Pro_74B | Qwen2VL_70B_LLM    | Qwen2VL_70B_ViT    | whisper-large-v3                                             | 74B_proj    | 74B_ckpt                                               |
+
+## Preparation
+### Training Data
+
+We provide the processed data for the model training. All speech-related training data can be downloaded [Lyra-Data](https://huggingface.co/collections/zszhong/lyra-data-675d80fbab80334eb52cdd82).
 
 For **model pretraining data**, please download the following the training multi-modality data and organize them as:
 
-`->` means put the data in the local folder.
+`⇒` means put the data in the local folder. The pretraining json file can be downloaded from [Lyra_Pretrain](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_Pretrain)
 
-- [LibriSpeech](https://www.openslr.org/12) -> `data/Lyra_Pretrain/LibriSpeech` 
+- [LibriSpeech](https://www.openslr.org/12) ⇒ `data/Lyra_Pretrain/LibriSpeech` 
 
-  ​              and -> `data/Lyra_SFT/multi_modality_speech/LibriSpeech`
+  ​              and ⇒ `data/Lyra_SFT/multi_modality_speech/LibriSpeech`
 
-  ​	      and -> `data/Lyra_Eval/LibriSpeech`   download all training and develop data.
+  ​	      and ⇒ `data/Lyra_Eval/LibriSpeech`   download all training and develop data.
 
-- [Common Voice](https://commonvoice.mozilla.org/en/datasets) -> `data/Lyra_Pretrain/CommonVoice` download the English Common Voice Corpus.
+- [Common Voice](https://commonvoice.mozilla.org/en/datasets) ⇒ `data/Lyra_Pretrain/CommonVoice` download the English Common Voice Corpus.
 
 During the pretraining process, we filtered out some noisy and short audio speech data.
 
 For the **image part of finetuning data**, similar to Mini-Gemini, please download the following the instruction data and organize them as:
 
-`->` means put the data in the local folder.
+`⇒` means put the data in the local folder.
 
-- [COCO train2017](http://images.cocodataset.org/zips/train2017.zip) -> `data/Lyra_SFT/multi_modality_image/coco`
-- [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip) -> `data/Lyra_SFT/multi_modality_image/gqa`
-- [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing) (**we save all files as `.jpg`**) -> `data/Lyra_SFT/multi_modality_image/ocr_vqa`
-- [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip) (not included for training) -> `data/Lyra_SFT/multi_modality_image/textvqa`
-- [VisualGenome part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [VisualGenome part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip) -> `data/Lyra_SFT/multi_modality_image/vg`
-- [ShareGPT4V-100K](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) -> `data/Lyra_SFT/multi_modality_image/sam`, `share_textvqa`, `wikiart`, `web-celebrity`, `web-landmark`
-- [LAION GPT4V](https://huggingface.co/datasets/laion/gpt4v-dataset) -> `data/Lyra_SFT/multi_modality_image/gpt4v-dataset`
-- [ALLaVA Instruction](https://github.com/FreedomIntelligence/ALLaVA) -> `data/Lyra_SFT/multi_modality_image/ALLaVA-4V`
-- [DocVQA](https://www.docvqa.org/datasets/docvqa) -> `data/Lyra_SFT/multi_modality_image/docvqa`
-- [ChartQA](https://github.com/vis-nlp/ChartQA) -> `data/Lyra_SFT/multi_modality_image/chartqa`
-- [DVQA](https://github.com/kushalkafle/DVQA_dataset) -> `data/Lyra_SFT/multi_modality_image/dvqa`
-- [AI2D](https://allenai.org/data/diagrams) -> `data/Lyra_SFT/multi_modality_image/ai2d`
+- [COCO train2017](http://images.cocodataset.org/zips/train2017.zip) ⇒ `data/Lyra_SFT/multi_modality_image/coco`
+- [GQA](https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip) ⇒ `data/Lyra_SFT/multi_modality_image/gqa`
+- [OCR-VQA](https://drive.google.com/drive/folders/1_GYPY5UkUy7HIcR0zq3ZCFgeZN7BAfm_?usp=sharing) (**we save all files as `.jpg`**) ⇒ `data/Lyra_SFT/multi_modality_image/ocr_vqa`
+- [TextVQA](https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip) (not included for training) ⇒ `data/Lyra_SFT/multi_modality_image/textvqa`
+- [VisualGenome part1](https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip), [VisualGenome part2](https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip) ⇒ `data/Lyra_SFT/multi_modality_image/vg`
+- [ShareGPT4V-100K](https://github.com/InternLM/InternLM-XComposer/blob/main/projects/ShareGPT4V/docs/Data.md) ⇒ `data/Lyra_SFT/multi_modality_image/sam`, `share_textvqa`, `wikiart`, ...
+- [LAION GPT4V](https://huggingface.co/datasets/laion/gpt4v-dataset) ⇒ `data/Lyra_SFT/multi_modality_image/gpt4v-dataset`
+- [ALLaVA Instruction](https://github.com/FreedomIntelligence/ALLaVA) ⇒ `data/Lyra_SFT/multi_modality_image/ALLaVA-4V`
+- [DocVQA](https://www.docvqa.org/datasets/docvqa) ⇒ `data/Lyra_SFT/multi_modality_image/docvqa`
+- [ChartQA](https://github.com/vis-nlp/ChartQA) ⇒ `data/Lyra_SFT/multi_modality_image/chartqa`
+- [DVQA](https://github.com/kushalkafle/DVQA_dataset) ⇒ `data/Lyra_SFT/multi_modality_image/dvqa`
+- [AI2D](https://allenai.org/data/diagrams) ⇒ `data/Lyra_SFT/multi_modality_image/ai2d`
 
 For the **audio part of finetuning data**, please download the following the instruction data and organize them as:
 
-`->` means put the data in the local folder.
+`⇒` means put the data in the local folder.
 
-- [Lyra_MultiModal](https://huggingface.co/datasets/zszhong/Lyra_MultiModal) -> `data/Lyra_SFT/multi_modality_speech/Lyra_MM` 
+- [Lyra_MultiModal](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_SFT/multi_modality_speech) ⇒ `data/Lyra_SFT/multi_modality_speech/Lyra_MM` 
 
-  For details, please refer the [Lyra multi-modality preparation]().
+  For reproduced details, please refer the [Lyra multi-modality preparation](https://github.com/dvlab-research/Lyra/tree/main/data_preparation/multi_modality).
 
 For the **long speech** audio finetuning data, please download the following the instruction data and organize them as:
 
-`->` means put the data in the local folder.
+`⇒` means put the data in the local folder.
 
-- [Lyra_LongSpeech](https://huggingface.co/datasets/zszhong/Lyra_LongSpeech) -> `data/Lyra_SFT/long_speech/Lyra_LongSpeech`
+- [Lyra_LongSpeech](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_SFT/long_speech) ⇒ `data/Lyra_SFT/long_speech/Lyra_LongSpeech`
 
-  For details, please refer the [Lyra long-speech preparation]().
+  For reproduced details, please refer the [Lyra long-speech preparation](https://github.com/dvlab-research/Lyra/tree/main/data_preparation/long_speech).
 
 For the **text-speech generation** data, please download the following the instruction data and organize them as:
 
-`->` means put the data in the local folder.
+`⇒` means put the data in the local folder.
 
-- [Lyra_SpeechGeneration](https://huggingface.co/datasets/zszhong/Lyra_SpeechGeneration)  -> `data/Lyra_SFT/speech_generation` 
+- [Lyra_SpeechGeneration](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_SFT/speech_generation)  ⇒ `data/Lyra_SFT/speech_generation` 
 
-  For details, please refer the [Lyra speech generation preparation]().
+  For reproduced details, please refer the [Lyra speech generation preparation](https://github.com/dvlab-research/Lyra/tree/main/data_preparation/speech_generation).
 
-For **model evaluation data**, to be release soon!
+### Evaluation Data
+
+All speech-related evaluation data can be downloaded [Lyra-Evaluation](https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149).
+
+For **speech-centric evaluation data**, we mainly consider three types:
+
+1. **text-speech ability**: LibriSpeech, Lyra_needle_in_a_haystack
+
+- [Lyra_needle_in_a_haystack](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/Lyra_needle_in_a_haystack) ⇒ `data/Lyra_Eval/Lyra_needle_in_a_haystack` 
+
+2. **image-speech ability**: TextVQA_speech, MM_vet_speech, Docvqa_val, Chartvqa_human
+
+- [TextVQA_speech](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/TextVQA_speech) ⇒ `data/Lyra_Eval/TextVQA_speech`
+
+- [MM_vet_speech](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/MM_vet_speech) ⇒ `data/Lyra_Eval/MM_vet_speech`
+
+- [Docvqa_val](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/Docvqa_val) ⇒ `data/Lyra_Eval/Docvqa_val`
+
+- [Chartvqa_human](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/Chartvqa_human) ⇒ `data/Lyra_Eval/Chartvqa_human`
+
+3. **video-speech ability**: VideoMME_speech
+
+- [VideoMME_speech](https://huggingface.co/datasets/zszhong/Lyra-Eval/tree/main/VideoMME_speech) ⇒ `data/Lyra_Eval/VideoMME_speech`
+
 
 Please put the pretrained data, finetuned data, and eval data in  `Lyra_Pretrain`, `Lyra_SFT`, and `Lyra_Eval` subset following [Structure](#structure).
 
 ### Pretrained Weights
 
-We recommend users to download the pretrained weights from the following link Qwen2VL_2B_LLM, Qwen2VL_7B_LLM, Qwen2VL_70B_LLM, Qwen2VL_2B_ViT, Qwen2VL_7B_ViT, Qwen2VL_70B_ViT, [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo), [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3),  [imagebind_huge](https://dl.fbaipublicfiles.com/imagebind/imagebind_huge.pth), and put them in `model_zoo` following [Structure](#structure).
+We recommend users to download the pretrained weights from the following link:
+
+Qwen2VL_XB_LLM and Qwen2VL_XB_ViT are extracted from [Qwen2-VL](https://github.com/QwenLM/Qwen2-VL) to adapt to our training framework. 
+
+For your convenience we also provide the corresponding download links in the [Model](#model) part.
+
+[whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo), [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3),  [imagebind_huge](https://dl.fbaipublicfiles.com/imagebind/imagebind_huge.pth), and put them in `model_zoo` following [Structure](#structure).
 
 Download the unit-based HiFi-GAN vocoder using the follow commands:
 

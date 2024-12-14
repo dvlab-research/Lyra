@@ -161,6 +161,9 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
         if not speech_tower.is_loaded:
             speech_tower.load_model()
         speech_tower.to(device=device, dtype=torch.float16)
+        speech_processor = speech_tower.speech_processor
+    else:
+        speech_processor = None
         
     if model_lora_path is not None:
         model.load_adapter(model_lora_path)
@@ -182,4 +185,4 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
     else:
         context_len = 2048
         
-    return tokenizer, model, image_processor, context_len
+    return tokenizer, model, image_processor, context_len, speech_processor

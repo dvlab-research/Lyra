@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import os
 
-from transformers import WhisperModel, WhisperProcessor, WhisperConfig
+from transformers import WhisperModel, WhisperFeatureExtractor, WhisperConfig
 import pdb
 
 class WhisperTower(nn.Module):
@@ -22,6 +22,7 @@ class WhisperTower(nn.Module):
             self.cfg_only = WhisperConfig.from_pretrained(self.speech_tower_name)
 
     def load_model(self):
+        self.speech_processor = WhisperFeatureExtractor.from_pretrained(self.speech_tower_name)
         self.speech_tower = WhisperModel.from_pretrained(self.speech_tower_name).encoder
         self.speech_tower.requires_grad_(False)
         self.is_loaded = True
@@ -29,7 +30,6 @@ class WhisperTower(nn.Module):
     @torch.no_grad()
     def forward(self, speeches):
         speech_features = self.speech_tower(speeches.to(device=self.speech_tower.device), return_dict=True).last_hidden_state
-
         return speech_features
 
 

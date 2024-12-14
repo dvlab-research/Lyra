@@ -1767,8 +1767,6 @@ def train(attn_implementation=None):
         model.initialize_vision_tokenizer(model_args, tokenizer=tokenizer)
 
     # Start: add speech module
-    
-    
     if model_args.generate:
         model.initialize_speech_generator(
             model_args=model_args
@@ -1799,12 +1797,12 @@ def train(attn_implementation=None):
 
         speech_tower = model.get_speech_tower()
         speech_tower.to(dtype=torch.bfloat16 if training_args.bf16 else torch.float16, device=training_args.device)
-        
-        if "whisper" in speech_tower_name.lower():
-            from transformers import WhisperFeatureExtractor
-            data_args.speech_processor = WhisperFeatureExtractor.from_pretrained(model_args.speech_tower)
-        else:
-            raise NotImplementedError
+        data_args.speech_processor = copy.deepcopy(speech_tower.speech_processor)
+        # if "whisper" in speech_tower_name.lower():
+        #     from transformers import WhisperFeatureExtractor
+        #     data_args.speech_processor = WhisperFeatureExtractor.from_pretrained(model_args.speech_tower)
+        # else:
+        #     raise NotImplementedError
             
         data_args.speech_processor_type = speech_tower_name.lower()
         data_args.is_speech_multimodal = True

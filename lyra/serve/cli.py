@@ -79,7 +79,7 @@ def main(args):
         if 'extractor' not in model_name.lower():
             model_name = model_name + '_extractor'
 
-    tokenizer, model, image_processor, _ = load_pretrained_model(args.model_path, args.model_base, model_name, args.load_8bit, args.load_4bit, model_lora_path=args.lora_path, use_flash_attn=True, device=args.device)
+    tokenizer, model, image_processor, _, speech_processor = load_pretrained_model(args.model_path, args.model_base, model_name, args.load_8bit, args.load_4bit, model_lora_path=args.lora_path, use_flash_attn=True, device=args.device)
     
     model_lora_path = f'{args.model_path}/speech_lora'
     model.load_adapter(model_lora_path, adapter_name="speech")
@@ -166,7 +166,6 @@ def main(args):
         wav = resample_transform(wav)
         if wav.ndim != 1: # convert to mono
             wav = wav[0]
-        speech_processor = WhisperFeatureExtractor.from_pretrained(model.config.mm_speech_tower)
         
         speech_tensor = []
         whipser_len = target_sample_rate * 30
