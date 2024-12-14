@@ -92,7 +92,7 @@ We provide the processed data for the model training. All speech-related trainin
 
 For **model pretraining data**, please download the following the training multi-modality data and organize them as:
 
-`⇒` means put the data in the local folder. The pretraining json file can be downloaded from [Lyra_Pretrain](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_Pretrain)
+`⇒` means put the data in the local folder. The pretraining json file can be downloaded from [Lyra_Pretrain](https://huggingface.co/datasets/zszhong/Lyra-Data/tree/main/Lyra_Pretrain).
 
 - [LibriSpeech](https://www.openslr.org/12) ⇒ `data/Lyra_Pretrain/LibriSpeech` 
 
