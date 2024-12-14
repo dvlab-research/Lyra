@@ -19,7 +19,7 @@ Lyra shows superiority compared with leading omni-models in:
 3. More efficient: Less training data, support faster training and inference.
 
 ## Release
-- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2412.09501.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc). More related data and checkpoints will be released soon!
+- [12/12] 🔥 Lyra is coming! We release the [paper](https://arxiv.org/pdf/2412.09501.pdf), [demo](https://103.170.5.190:17860/), [code](https://github.com/dvlab-research/Lyra), [models](https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc), [training data](https://huggingface.co/collections/zszhong/lyra-data-675d80fbab80334eb52cdd82) and [evaluation data](https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149). More related checkpoints will be released soon!
 
 ## Contents
 - [Demo](#demo)
