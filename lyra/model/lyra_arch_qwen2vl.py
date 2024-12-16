@@ -591,7 +591,7 @@ class LyraMetaForCausalLM(ABC):
                         cur_speech_features = speech_features[cur_sp_idx]
                         cur_new_input_embeds.append(cur_speech_features)
                         cur_new_labels.append(torch.full((cur_speech_features.shape[0],), IGNORE_INDEX, device=cur_labels.device, dtype=cur_labels.dtype))
-                        cur_position_ids.append(torch.arange(0, cur_speech_features.shape[0], dtype=position_ids.dtype, device=position_ids.device).repeat(3,1) + max_pos_id)
+                        cur_position_ids.append(torch.arange(0, cur_speech_features.shape[0], dtype=position_ids.dtype, device=position_ids.device).repeat(3, 1) + max_pos_id)
                         max_pos_id = cur_position_ids[-1].max() + 1
                         cur_sp_idx += 1
             

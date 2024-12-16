@@ -790,7 +790,6 @@ def preprocess_qwen2vl(
     sep = conv.sep + conv.roles[1]
     for conversation, target in zip(conversations, targets):
         total_len = int(target.ne(tokenizer.pad_token_id).sum())
-        # pdb.set_trace()
         rounds = conversation.split(conv.sep)
         re_rounds = [conv.sep.join(rounds[:3])] # system + user + gpt
         for conv_idx in range(3, len(rounds), 2):
@@ -898,14 +897,12 @@ def preprocess_qwen2(
     sep = conv.sep + conv.roles[1]
     for conversation, target in zip(conversations, targets):
         total_len = int(target.ne(tokenizer.pad_token_id).sum())
-        # pdb.set_trace()
         rounds = conversation.split(conv.sep)
         re_rounds = [conv.sep.join(rounds[:3])] # system + user + gpt
         for conv_idx in range(3, len(rounds), 2):
             re_rounds.append(conv.sep.join(rounds[conv_idx:conv_idx+2]))    # user + gpt
         
         # include <bos> for all rounds
-        # pdb.set_trace()
         cur_len = 1
         target[:cur_len] = IGNORE_INDEX
         
@@ -1378,7 +1375,7 @@ class LazySupervisedDataset(Dataset):
                                 return_tensors="pt", 
                                 return_attention_mask=True)
                 speech_total.append(speech["input_features"].squeeze())  # (mels, lengths), e.g. (128, 3000)
-            
+            import pdb; pdb.set_trace()
             if len(speech_total) > 1:
                 speech = torch.stack(speech_total, dim=0)
             else: # always in this branch in current version

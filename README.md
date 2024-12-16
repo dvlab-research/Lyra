@@ -1,14 +1,17 @@
 # <img src="assets/lyra.svg" alt="icon" width="30" height="30"> <span style="font-size:30px;">Lyra: An Efficient and Speech-Centric Framework <br>for Omni-Cognition</span>
 
-<a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
-<a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
+<a href='https://huggingface.co/papers/2412.09501'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Discussion-orange'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-data-675d80fbab80334eb52cdd82'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a>
+<br>
+<a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
 <a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 
 
 Overview of Lyra:
+
 <div align=center>
 <img width="98%" src="assets/overview.png"/>
 </div>
@@ -34,7 +37,7 @@ Lyra shows superiority compared with leading omni-models in:
 - [License](#license)
 
 ## Demo
-We provide [video demo](https://www.youtube.com/watch?v=7kh-M0jmmtI) here for better experience and illustrations. More examples can be found in our [project page](https://lyra-omni.github.io/) and feel free to try our [online demo](https://103.170.5.190:17860/)! Due to the computing cost, GPU memory of the demo machine (3090), and uploading storage, the long-speech function is not supported for the current online demo. 😰
+We provide [video demo](https://www.youtube.com/watch?v=7kh-M0jmmtI) here for better experience and illustrations. More examples can be found in our [project page](https://lyra-omni.github.io/) and feel free to try our [online demo](https://103.170.5.190:17860/)! Due to the computing cost, GPU memory of the demo machine (GeForce RTX 3090), and uploading storage, the long-speech function is not supported for the current online demo. 😰
 
 <p align="center" width="98%">
   <a href="https://youtu.be/7kh-M0jmmtI" target="_blank">
@@ -482,11 +485,43 @@ bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_speech_generate.sh
     <td>1.8</td>
   </tr>
 </table>
-
-
 ### Benchmarks scripts
 
-To be release soon!
+Please make sure you download and organize the [evaluation data](https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149) following [Preparation](#preparation) before starting evaluation.
+
+We provide four speech **speech-centric** evaluation benchmark scripts here:
+
+**Text-speech ability**: LibriSpeech:
+
+```bash
+# you can change the model path and lora path in the script:
+# CKPT="Lyra_Base_9B", LORA_PATH="Lyra_Base_9B/speech_lora"
+# the LibriSpeech test-clean WER result of Lyra-Base-9B is about 2.0%
+bash scripts/eval/lyra_librispeech_wer.sh
+```
+
+**Image-speech ability**: TextVQA_speech:
+
+```bash
+# the TextVQA (speech) accuracy result of Lyra-Base-9B is about 80.5%
+bash scripts/eval/lyra_textvqa_speech.sh
+```
+
+**Image-speech ability**: Chartvqa_human:
+
+```bash
+# the ChartQA (speech) accuracy result of Lyra-Base-9B is about 61.0%
+bash scripts/eval/lyra_chartvqa_speech.sh
+```
+
+**Image-speech ability**: Docvqa_val:
+
+```bash
+# the DocVQA (speech) accuracy result of Lyra-Base-9B is about 86.2%
+bash scripts/eval/lyra_docvqa_speech.sh
+```
+
+
 
 ### CLI Inference
 
@@ -504,7 +539,7 @@ python -m lyra.serve.cli \
 	--generate-speech
 ```
 
-Lyra can also handle your long speech input (max duration can be about two or three hours).
+Lyra can also handle your long speech input (max duration can be about two or three hours, suggest on A100 GPUs).
 
 Here is an example: [ABC New, Oct. 1, 2024](https://www.youtube.com/watch?v=A7LTOsf7JMQ&t=1063s), 20 mins:
 

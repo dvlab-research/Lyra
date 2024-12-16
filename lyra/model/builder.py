@@ -66,7 +66,7 @@ GenerationMixin._maybe_initialize_input_ids_for_generation = initialize_input_id
 
 def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, load_4bit=False, 
                           device_map="auto", device="cuda", use_flash_attn=False, 
-                          model_lora_path=None, merge_lora_path=None, **kwargs):
+                          model_lora_path=None, merge_lora_path=None, eval_bench=False, **kwargs):
     kwargs = {"device_map": device_map, **kwargs}
 
     if device != "cuda":
@@ -96,7 +96,9 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
         else:
             # Qwen2-VL based
             tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=False)
-            if "extractor" in model_name.lower():
+            if eval_bench:
+                model = LyraQwen2VLForCausalLM.from_pretrained(model_path, low_cpu_mem_usage=True, **kwargs)
+            elif "extractor" in model_name.lower():
                 model = LyraQwen2VLForCausalLMExtractor.from_pretrained(model_path, low_cpu_mem_usage=True, **kwargs)
             elif "Base" in model_name or "Mini" in model_name or "Pro" in model_name:
                 model = Lyra2SQwen2VLForCausalLM.from_pretrained(model_path, low_cpu_mem_usage=True, **kwargs)

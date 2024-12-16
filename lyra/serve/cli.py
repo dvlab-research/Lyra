@@ -17,7 +17,6 @@ import requests
 from PIL import Image, ImageDraw
 from io import BytesIO
 from transformers import TextStreamer
-from transformers import WhisperFeatureExtractor
 
 from fairseq.models.text_to_speech.vocoder import CodeHiFiGANVocoder
 import soundfile as sf
@@ -83,12 +82,12 @@ def main(args):
     
     model_lora_path = f'{args.model_path}/speech_lora'
     model.load_adapter(model_lora_path, adapter_name="speech")
-    print(f"Loading LoRA weights from {model_lora_path}")
+    print(f"Loading Speech LoRA weights from {model_lora_path}")
     model.to(torch.float16)
     
     model_lora_path = f'{args.model_path}/long_speech_lora'
     model.load_adapter(model_lora_path, adapter_name="long_speech")
-    print(f"Loading LoRA weights from {model_lora_path}")
+    print(f"Loading Long Speech LoRA weights from {model_lora_path}")
     model.to(torch.float16)
     
     with open(args.vocoder_cfg) as f:
@@ -235,6 +234,8 @@ def main(args):
         conv.append_message(conv.roles[0], inp)
         conv.append_message(conv.roles[1], None)
         prompt = conv.get_prompt()
+        
+        print(prompt)
 
         if images is not None:
             input_ids = tokenizer_image_speech_token(prompt, tokenizer, return_tensors='pt').unsqueeze(0).to(model.device)
