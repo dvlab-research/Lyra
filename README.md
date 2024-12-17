@@ -82,7 +82,7 @@ We provide all our fully finetuned models:
 
 | Model        | Base LLM           | Vision Encoder     | Speech Encoder                                               | Projector   | Full                                                   |
 | ------------ | ------------------ | ------------------ | ------------------------------------------------------------ | ----------- | ------------------------------------------------------ |
-| Lyra_Mini_3B | [Qwen2VL_2B_LLM]() | [Qwen2VL_2B_ViT]() | [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo) | [3B_proj]() | [3B_ckpt]()                                            |
+| Lyra_Mini_3B | [Qwen2VL_2B_LLM]() | [Qwen2VL_2B_ViT]() | [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo) | [3B_proj]() | [3B_ckpt](https://huggingface.co/zszhong/Lyra_Mini_3B) |
 | Lyra_Base_9B | [Qwen2VL_7B_LLM]() | [Qwen2VL_7B_ViT]() | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [9B_proj]() | [9B_ckpt](https://huggingface.co/zszhong/Lyra_Base_9B) |
 | Lyra_Pro_74B | Qwen2VL_70B_LLM    | Qwen2VL_70B_ViT    | whisper-large-v3                                             | 74B_proj    | 74B_ckpt                                               |
 
@@ -452,7 +452,7 @@ bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_speech_generate.sh
     <td>73.9</td>
     <td>75.0</td>
     <td>40.7</td>
-    <td>2.1</td>
+    <td>2.4</td>
   </tr>
   <tr>
     <td><b>Lyra-Base</b></td>
@@ -485,6 +485,7 @@ bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_speech_generate.sh
 </table>
 
 
+
 ### Benchmarks scripts
 
 
@@ -497,7 +498,9 @@ We provide four speech **speech-centric** evaluation benchmark scripts here:
 
 ```bash
 # you can change the model path and lora path in the script:
-# CKPT="Lyra_Base_9B", LORA_PATH="Lyra_Base_9B/speech_lora"
+# e.g., CKPT="Lyra_Mini_3B", LORA_PATH="Lyra_Mini_3B/speech_lora"
+# e.g., CKPT="Lyra_Base_9B", LORA_PATH="Lyra_Base_9B/speech_lora"
+# the LibriSpeech test-clean WER result of Lyra-Mini-3B is about 2.4%
 # the LibriSpeech test-clean WER result of Lyra-Base-9B is about 2.0%
 bash scripts/eval/lyra_librispeech_wer.sh
 ```
@@ -505,6 +508,7 @@ bash scripts/eval/lyra_librispeech_wer.sh
 **Image-speech ability**: TextVQA_speech:
 
 ```bash
+# the TextVQA (speech) accuracy result of Lyra-Mini-3B is about 73.6%
 # the TextVQA (speech) accuracy result of Lyra-Base-9B is about 80.5%
 bash scripts/eval/lyra_textvqa_speech.sh
 ```
@@ -512,6 +516,7 @@ bash scripts/eval/lyra_textvqa_speech.sh
 **Image-speech ability**: Chartvqa_human:
 
 ```bash
+# the ChartQA (speech) accuracy result of Lyra-Mini-3B is about 42.2%
 # the ChartQA (speech) accuracy result of Lyra-Base-9B is about 61.0%
 bash scripts/eval/lyra_chartvqa_speech.sh
 ```
@@ -519,6 +524,7 @@ bash scripts/eval/lyra_chartvqa_speech.sh
 **Image-speech ability**: Docvqa_val:
 
 ```bash
+# the DocVQA (speech) accuracy result of Lyra-Mini-3B is about 76.0%
 # the DocVQA (speech) accuracy result of Lyra-Base-9B is about 86.2%
 bash scripts/eval/lyra_docvqa_speech.sh
 ```
@@ -535,6 +541,12 @@ Please make sure you have installed [fairseq](https://github.com/facebookresearc
 # speech-file:      <path to your audio: instruction>
 # generate speech:  <output path to generated speech: examples/pred_roundX.wav>
 python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Mini_3B \
+	--image-file examples/Chinese_painting.jpg \
+	--audio-file examples/Chinese_painting.mp3 \
+	--generate-speech
+	
+python -m lyra.serve.cli \
 	--model-path work_dirs/Lyra_Base_9B \
 	--image-file examples/Chinese_painting.jpg \
 	--audio-file examples/Chinese_painting.mp3 \
@@ -549,6 +561,11 @@ Here is an example: [ABC New, Oct. 1, 2024](https://www.youtube.com/watch?v=A7LT
 # speech-file: <path to your long audio: context>
 # instuction by the text keyboard input
 python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Mini_3B \
+	--audio-file examples/ABC_News_20241001.mp3 \
+	--generate-speech
+
+python -m lyra.serve.cli \
 	--model-path work_dirs/Lyra_Base_9B \
 	--audio-file examples/ABC_News_20241001.mp3 \
 	--generate-speech
@@ -559,6 +576,12 @@ Here is an example for video input with its audio (you can use [ffmpeg](https://
 ```bash
 # video-file:  <path to your video: context>
 # speech-file: <path to your audio: instruction>
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Mini_3B \
+	--video-file examples/movement.mp4 \
+	--audio-file examples/movement.mp3 \
+	--generate-speech
+	
 python -m lyra.serve.cli \
 	--model-path work_dirs/Lyra_Base_9B \
 	--video-file examples/movement.mp4 \
@@ -571,6 +594,11 @@ Here is an example for video input and text instruction:
 ```bash
 # video-file: <path to your video: context>
 # instuction by the text keyboard input
+python -m lyra.serve.cli \
+	--model-path work_dirs/Lyra_Mini_3B \
+	--video-file examples/Trump.mp4 \
+	--generate-speech
+
 python -m lyra.serve.cli \
 	--model-path work_dirs/Lyra_Base_9B \
 	--video-file examples/Trump.mp4 \
