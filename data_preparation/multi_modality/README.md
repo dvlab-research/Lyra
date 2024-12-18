@@ -2,8 +2,8 @@
 Lyra supports both sound and speech. The audio data preparation scripts are organized as follows.
 
 ```
-|──data
-|   |──MultiModality
+|──data_preparation
+|   |──multi_modality
 |   |   |──README.md
 |   |   |──process_speech
 |   |   |──process_sound
@@ -15,7 +15,7 @@ Lyra supports both sound and speech. The audio data preparation scripts are orga
 Speech data in Lyra contains two parts: the pre-training data and the supervised fine-tuning data. 
 
 #### Pre-training Data
-- Install necesary packages
+- Install necessary packages:
 ```angular2html
 # Install torchaudio
 pip install torchaudio
@@ -27,13 +27,14 @@ pip install -U openai-whisper
 
 - Generate annotation for Librispeech, using [prepare_librispeech.py](process_speech/prepare_librispeech.py). Remember changing --input_dir, --output_file and --splits in the python file.
 ```angular2html
-python prepare_librispeech.py --input_dir '[YOUR Librispeech SPEECHES PATH]' \
+python process_speech/prepare_librispeech.py --input_dir '[YOUR Librispeech SPEECHES PATH]' \
     --output_file '[OUTPUT ANNOTATION PATH]' \
     --splits=[SPLITS]
 
-# For example: python prepare_librispeech.py --input_dir 'dataset/librispeech' \
-    # --output_file 'dataset/librispeech/annotation/test-clean.jsonl' \
-    # --splits='test-clean'
+# For example
+python process_speech/prepare_librispeech.py --input_dir 'dataset/librispeech' \
+     --output_file 'dataset/librispeech/annotation/test-clean.jsonl' \
+     --splits='test-clean'
 ```
 
 - Once you get the raw annotation of Librispeech, you should modify it to supervised fine-tuning format, using [prepare_speech_sft_data.py](process_speech/prepare_speech_sft_data.py). Remember changing line 248 and 267 in the python file.
@@ -52,10 +53,12 @@ We use [ChatTTS](https://github.com/2noise/ChatTTS) to convert text-image SFT da
 
 - The final speech's folder architecture should be 
 ```
-|──speech_sft_data
-|  |──LibriSpeech
-|  |──Lyra_MM
-|──... 
+├── data
+│   ├── Lyra_SFT
+│   │   ├── multi_modality_speech
+│   │   │   ├── lyra_multimodal.json
+│   │   │   ├── Lyra_MM
+│   │   │   ├── LibriSpeech
 ```
 
 ### Sound 
@@ -64,7 +67,7 @@ We use [ChatTTS](https://github.com/2noise/ChatTTS) to convert text-image SFT da
 audiocap_id,youtube_id,start_time,caption
 ```
 
-- Install necesary packages
+- Install necessary packages
 ```angular2html
 # Install ffmpeg
 sudo apt install ffmpeg

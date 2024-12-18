@@ -3,8 +3,11 @@ Our entire process consists of two parts: converting QA data into audio and conv
 
 ## Text-to-Audio
 We use Microsoft's open-source [Edge-TTS](https://github.com/rany2/edge-tts) to convert the Answer into audio. To ensure consistency in the generated voices, we select only one person's voice. Specifically, in our experiments, we choose the default voice "en-GB-SoniaNeural".  
+
 We provide an example script, which includes functionalities such as checking if the text is entirely in English, and transforming multiple-choice questions into a more readable format.  
+
 The code is as follows:
+
 ```python
 python generate_audio.py \
     --sft_data_path <Path to SFT data> \
@@ -19,7 +22,7 @@ We employ [mHuBERT](https://github.com/facebookresearch/fairseq/blob/main/exampl
 
 ### Download
 ```bash
-cd data/SpeechGeneration/code
+cd data_preparation/speech_generation
 wget https://dl.fbaipublicfiles.com/hubert/mhubert_base_vp_en_es_fr_it3.pt
 wget https://dl.fbaipublicfiles.com/hubert/mhubert_base_vp_en_es_fr_it3_L11_km1000.bin
 ```
