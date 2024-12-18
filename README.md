@@ -37,6 +37,8 @@ Lyra shows superiority compared with leading omni-models in:
 ## Demo
 We provide [video demo](https://www.youtube.com/watch?v=7kh-M0jmmtI) here for better experience and illustrations. More examples can be found in our [project page](https://lyra-omni.github.io/) and feel free to try our [online demo](https://103.170.5.190:17860/)! Due to the computing cost, GPU memory of the demo machine (GeForce RTX 3090), and uploading storage, the long-speech function is not supported for the current online demo. 😰
 
+❗❗❗For the online demo, start by selecting the instruction type (either speech or text) in the top-left corner.
+
 <p align="center" width="98%">
   <a href="https://youtu.be/7kh-M0jmmtI" target="_blank">
     <img src="https://raw.githubusercontent.com/dvlab-research/Lyra/main/assets/video.png" alt="Lyra" style="width: 98%; min-width: 300px; display: block; margin: auto;">
@@ -492,7 +494,7 @@ bash scripts/train/Lyra_Base_9B/Lyra_Base_qwen2vl_9B_SFT_speech_generate.sh
 
 Please make sure you download and organize the [evaluation data](https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149) following [Preparation](#preparation) before starting evaluation.
 
-We provide four speech **speech-centric** evaluation benchmark scripts here:
+We provide five speech **speech-centric** evaluation benchmark scripts here:
 
 **Text-speech ability**: LibriSpeech:
 
@@ -527,6 +529,16 @@ bash scripts/eval/lyra_chartvqa_speech.sh
 # the DocVQA (speech) accuracy result of Lyra-Mini-3B is about 76.0%
 # the DocVQA (speech) accuracy result of Lyra-Base-9B is about 86.2%
 bash scripts/eval/lyra_docvqa_speech.sh
+```
+
+**Image-speech ability**: MM_vet_speech:
+
+```bash
+# the MM-Vet (speech) accuracy result of Lyra-Mini-3B is about 47.8%
+# the MM-Vet (speech) accuracy result of Lyra-Base-9B is about 57.0%
+# you need submit the file e.g., work_dirs/MM_vet_speech/Lyra_xxx_xB/Lyra_Mini_3B.json
+# to https://huggingface.co/spaces/whyu/MM-Vet_Evaluator for GPT judgement
+bash scripts/eval_release/lyra_mmvet_speech.sh
 ```
 
 
