@@ -82,11 +82,11 @@ Lyra supports multi-modal inputs. When the data contains a speech modality, we u
 
 We provide all our fully finetuned models:
 
-| Model        | Base LLM           | Vision Encoder     | Speech Encoder                                               | Projector                                                    | Full                                                   |
-| ------------ | ------------------ | ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ |
-| Lyra_Mini_3B | [Qwen2VL_2B_LLM]() | [Qwen2VL_2B_ViT]() | [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo) | [3B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Mini_3B_mm_speech_projector.bin) | [3B_ckpt](https://huggingface.co/zszhong/Lyra_Mini_3B) |
-| Lyra_Base_9B | [Qwen2VL_7B_LLM]() | [Qwen2VL_7B_ViT]() | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [9B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Base_9B_mm_speech_projector.bin) | [9B_ckpt](https://huggingface.co/zszhong/Lyra_Base_9B) |
-| Lyra_Pro_74B | Qwen2VL_70B_LLM    | Qwen2VL_70B_ViT    | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [74B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Pro_74B_mm_speech_projector.bin) | 74B_ckpt                                               |
+| Model        | Base LLM                                                     | Vision Encoder                                               | Speech Encoder                                               | Projector                                                    | Full CKPT                                              |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ |
+| Lyra_Mini_3B | [Qwen2VL_2B_LLM](https://huggingface.co/zszhong/Lyra_Qwen2VL_2B_LLM) | [Qwen2VL_2B_ViT](https://huggingface.co/zszhong/Lyra_Qwen2VL_2B_ViT) | [whisper-large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo) | [3B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Mini_3B_mm_speech_projector.bin) | [3B_ckpt](https://huggingface.co/zszhong/Lyra_Mini_3B) |
+| Lyra_Base_9B | [Qwen2VL_7B_LLM](https://huggingface.co/zszhong/Lyra_Qwen2VL_7B_LLM) | [Qwen2VL_7B_ViT](https://huggingface.co/zszhong/Lyra_Qwen2VL_7B_ViT) | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [9B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Base_9B_mm_speech_projector.bin) | [9B_ckpt](https://huggingface.co/zszhong/Lyra_Base_9B) |
+| Lyra_Pro_74B | Qwen2VL_70B_LLM                                              | Qwen2VL_70B_ViT                                              | [whisper-large-v3](https://huggingface.co/openai/whisper-large-v3) | [74B_proj](https://huggingface.co/zszhong/Lyra_Projector/blob/main/Lyra_Pro_74B_mm_speech_projector.bin) | 74B_ckpt                                               |
 
 ## Preparation
 ### Training Data
