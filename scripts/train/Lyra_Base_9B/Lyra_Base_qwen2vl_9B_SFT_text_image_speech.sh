@@ -4,7 +4,7 @@ file=${file%.sh}
 echo $file
 
 FINETUNE_NAME=$file
-PRETRAIN_AUDIO_NAME=Stage1_Lyra_Base_qwen2vl_9B_Pretrain
+PRETRAIN_AUDIO_NAME=Lyra_Base_qwen2vl_9B_Pretrain
 
 deepspeed --hostfile hostfile/hostfile_4 \
     lyra/train/train.py \
