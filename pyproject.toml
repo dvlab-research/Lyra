@@ -18,8 +18,9 @@ dependencies = [
     "accelerate==0.34.0", "peft", "bitsandbytes",
     "pydantic", "markdown2[all]", "numpy", "scikit-learn==1.2.2",
     "gradio==4.16.0", "gradio_client==0.8.1",
-    "requests", "httpx==0.24.0", "uvicorn", "fastapi",
-    "einops==0.6.1", "einops-exts==0.0.4", "timm==0.9.16", "soundfile", "torchaudio==2.1.2", "deepspeed==0.14.4", "flash-attn==2.6.3", "ninja", "wandb", "qwen_vl_utils", "openai-whisper", "ftfy", "numba", "jiwer"
+    "requests", "httpx==0.24.0", "uvicorn", "fastapi==0.115.6",
+    "einops==0.6.1", "einops-exts==0.0.4", "timm==0.9.16", "soundfile", "torchaudio==2.1.2", "deepspeed==0.14.4",
+    "flash-attn==2.6.3", "ninja", "wandb", "qwen_vl_utils", "openai-whisper", "ftfy", "numba", "jiwer", "moviepy"
 ]
 
 [project.optional-dependencies]

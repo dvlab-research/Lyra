@@ -3,7 +3,9 @@
 <a href='https://huggingface.co/papers/2412.09501'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Discussion-orange'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-model-674ea5bb3b39ff8f15de75fc'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-blue'></a>
 <a href='https://huggingface.co/collections/zszhong/lyra-data-675d80fbab80334eb52cdd82'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Data-green'></a>
-<a href='https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a><br><a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://huggingface.co/collections/zszhong/lyra-evaluation-675d7f038747ba865932a149'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Evaluation-yellow'></a><br>
+<a href='https://arxiv.org/pdf/2412.09501.pdf'><img src='https://img.shields.io/badge/Paper-arXiv-red'></a>
+<a href='https://www.youtube.com/watch?v=7kh-M0jmmtI'><img src='https://img.shields.io/badge/Video-YouTube-red'></a>
 <a href='https://103.170.5.190:17860/'><img src='https://img.shields.io/badge/Project-Demo-violet'></a>
 <a href='https://lyra-omni.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
 
@@ -621,7 +623,51 @@ python -m lyra.serve.cli \
 
 ### Gradio Web UI
 
-To be release soon!
+Here, we adopt the Gradio UI similar to that in LLaVA to provide a user-friendly omni-interface for our models. The UI example illustration is as follows:
+
+
+
+<div align=center>
+<img width="98%" src="assets/UI.png"/>
+</div>
+
+To launch a Gradio demo locally, please run the following commands one by one. If you plan to launch multiple model workers to compare between different checkpoints, you only need to launch the controller and the web server *ONCE*.
+
+#### Launch a controller
+```Shell
+python -m lyra.serve.controller --host 0.0.0.0 --port 10000
+```
+
+#### Launch a gradio web server.
+```Shell
+python -m lyra.serve.gradio_web_server --controller http://localhost:10000 --model-list-mode reload
+```
+You just launched the Gradio web interface. Now, you can open the web interface with the URL printed on the screen. You may notice that there is no model in the model list. Do not worry, as we have not launched any model worker yet. It will be automatically updated when you launch a model worker.
+
+#### Launch a model worker
+This is the actual *worker* that performs the inference on the GPU.  Each worker is responsible for a single model specified in `--model-path`.
+
+```Shell
+CUDA_VISIBLE_DEVICES='0,1,2,3,4,5,6,7' python -m lyra.serve.model_worker \
+	--host 0.0.0.0 \
+	--controller http://localhost:10000 \
+	--port 40000 \
+	--worker http://localhost:40000 \
+	--model-path work_dirs/Lyra_Base_9B \
+	--model-lora-path work_dirs/Lyra_Base_9B/speech_lora
+```
+Wait until the process finishes loading the model and you see " Uvicorn running on http://0.0.0.0:40000 (Press CTRL+C to quit)".  Now, refresh your Gradio web UI, and you will see the model you just launched in the model list.
+
+You can launch as many workers as you want, and compare between different models in the same Gradio interface. Please keep the `--controller` the same, and modify the `--port` and `--worker` to a different port number for each worker.
+```Shell
+CUDA_VISIBLE_DEVICES='0,1,2,3,4,5,6,7' python -m lyra.serve.model_worker \
+	--host 0.0.0.0 \
+	--controller http://localhost:10000 \
+	--port <different from 40000, say 40001> \
+	--worker http://localhost:<change accordingly, i.e. 40001> \
+	--model-path work_dirs/Lyra_Mini_3B \
+	--model-lora-path work_dirs/Lyra_Mini_3B/speech_lora
+```
 
 
 
