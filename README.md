@@ -623,7 +623,11 @@ python -m lyra.serve.cli \
 
 ### Gradio Web UI
 
-Here, we adopt the Gradio UI similar to that in LLaVA to provide a user-friendly omni-interface for our models. The UI example illustration is as follows:
+Here, we adopt the Gradio UI similar to that in LLaVA to provide a user-friendly omni-interface (text, image, video, and audio) for our models. 
+
+
+
+The UI example illustration is as follows:
 
 
 
@@ -640,7 +644,11 @@ python -m lyra.serve.controller --host 0.0.0.0 --port 10000
 
 #### Launch a gradio web server.
 ```Shell
-python -m lyra.serve.gradio_web_server --controller http://localhost:10000 --model-list-mode reload
+python -m lyra.serve.gradio_web_server \
+	--controller http://localhost:10000 \
+	--model-list-mode reload \
+	--ssl-certfile Your/SSL/Certfile/Path/cert.pem \
+	--ssl-keyfile Your/SSL/Keyfile/Path/key.pem
 ```
 You just launched the Gradio web interface. Now, you can open the web interface with the URL printed on the screen. You may notice that there is no model in the model list. Do not worry, as we have not launched any model worker yet. It will be automatically updated when you launch a model worker.
 
@@ -656,7 +664,7 @@ CUDA_VISIBLE_DEVICES='0,1,2,3,4,5,6,7' python -m lyra.serve.model_worker \
 	--model-path work_dirs/Lyra_Base_9B \
 	--model-lora-path work_dirs/Lyra_Base_9B/speech_lora
 ```
-Wait until the process finishes loading the model and you see " Uvicorn running on http://0.0.0.0:40000 (Press CTRL+C to quit)".  Now, refresh your Gradio web UI, and you will see the model you just launched in the model list.
+Wait until the process finishes loading the model and you see " Uvicorn running on XXXXXX (Press CTRL+C to quit)".  Now, refresh your Gradio web UI, and you will see the model you just launched in the model list.
 
 You can launch as many workers as you want, and compare between different models in the same Gradio interface. Please keep the `--controller` the same, and modify the `--port` and `--worker` to a different port number for each worker.
 ```Shell
