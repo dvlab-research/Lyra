@@ -623,11 +623,7 @@ python -m lyra.serve.cli \
 
 ### Gradio Web UI
 
-Here, we adopt the Gradio UI similar to that in LLaVA to provide a user-friendly omni-interface (text, image, video, and audio) for our models. 
-
-
-
-The UI example illustration is as follows:
+Here, we adopt the Gradio UI similar to that in LLaVA to provide a user-friendly omni-interface (text, image, video, and audio) for our models. The UI example illustration is as follows:
 
 
 
