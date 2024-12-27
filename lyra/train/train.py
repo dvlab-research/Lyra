@@ -230,7 +230,7 @@ def safe_save_model_for_hf_trainer(trainer: transformers.Trainer,
 
         weight_to_save = get_mm_adapter_state_maybe_zero_3(trainer.model.named_parameters(), keys_to_match)
         trainer.model.config.save_pretrained(output_dir)
-        # pdb.set_trace()
+
         current_folder = output_dir.split('/')[-1]
         parent_folder = os.path.dirname(output_dir)
         if trainer.args.local_rank == 0 or trainer.args.local_rank == -1:
@@ -249,7 +249,7 @@ def safe_save_model_for_hf_trainer(trainer: transformers.Trainer,
 
         weight_to_save = get_mm_adapter_state_maybe_zero_3(trainer.model.named_parameters(), keys_to_match)
         trainer.model.config.save_pretrained(output_dir)
-        # pdb.set_trace()
+
         current_folder = output_dir.split('/')[-1]
         parent_folder = os.path.dirname(output_dir)
         if trainer.args.local_rank == 0 or trainer.args.local_rank == -1:
@@ -489,8 +489,6 @@ def preprocess_v1(
         conversations.append(conv.get_prompt())
 
     # Tokenize conversations
-    # pdb.set_trace()
-
     if has_image:
         input_ids = torch.stack([tokenizer_image_token(prompt, tokenizer, return_tensors='pt') for prompt in conversations], dim=0)
     else:
@@ -512,7 +510,7 @@ def preprocess_v1(
 
         rounds = conversation.split(conv.sep2)
         cur_len = 1
-        # pdb.set_trace()
+
         target[:cur_len] = IGNORE_INDEX
         for i, rou in enumerate(rounds):
             if rou == "":
@@ -595,16 +593,16 @@ def preprocess_llama_3(
     sep = conv.sep + conv.roles[1]
     for conversation, target in zip(conversations, targets):
         total_len = int(target.ne(tokenizer.pad_token_id).sum())
-        # pdb.set_trace()
+
         rounds = conversation.split(conv.sep)
         re_rounds = [conv.sep.join(rounds[:3])] # system + user + gpt
         for conv_idx in range(3, len(rounds), 2):
             re_rounds.append(conv.sep.join(rounds[conv_idx:conv_idx+2]))    # user + gpt
-        # pdb.set_trace()
+
         # include <bos> for all rounds
         cur_len = 1
         target[:cur_len] = IGNORE_INDEX
-        # pdb.set_trace()
+
         for i, rou in enumerate(re_rounds):
             if rou == "":
                 break
@@ -1192,7 +1190,7 @@ class LazySupervisedDataset(Dataset):
         return length_list
     
     def _preprocess_image_qwen2vl(self, image, image_resolution):
-        # pdb.set_trace()
+
         if max(image.width, image.height) > image_resolution:
             resize_factor = image_resolution / max(image.width, image.height)
             width, height = int(image.width * resize_factor), int(image.height * resize_factor)
@@ -1375,7 +1373,7 @@ class LazySupervisedDataset(Dataset):
                                 return_tensors="pt", 
                                 return_attention_mask=True)
                 speech_total.append(speech["input_features"].squeeze())  # (mels, lengths), e.g. (128, 3000)
-            import pdb; pdb.set_trace()
+
             if len(speech_total) > 1:
                 speech = torch.stack(speech_total, dim=0)
             else: # always in this branch in current version
