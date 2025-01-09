@@ -13,8 +13,6 @@ deepspeed lyra/train/train.py \
     --version qwen2vl \
     --data_path data/one_sample.json \
     --image_folder data/one_sample/ \
-    --data_path /dataset-vlm/vyuqiliu/code/LLaMA-Factory/mgm_sample.json \
-    --image_folder /dataset-vlm/vyuqiliu/data/Dataset/MGM-Finetune \
     --vision_tower model_zoo/vision/Qwen2VL_7B_ViT \
     --mm_projector_type identity \
     --speech_folder data/Lyra_SFT/multi_modality_speech \
@@ -54,4 +52,5 @@ deepspeed lyra/train/train.py \
     --dataloader_num_workers 1 \
     --lazy_preprocess True \
     --report_to none \
+    --freeze_backbone True \
     --freeze_mm_mlp_adapter True
